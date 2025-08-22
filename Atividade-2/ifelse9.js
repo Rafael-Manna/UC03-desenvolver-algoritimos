@@ -6,10 +6,11 @@ let max = 1000
 let unidade = parseInt(saque % 10)
 let dezena = parseInt((saque % 100) / 10)
 let centena = parseInt(saque / 100)
+let cinquenta = parseInt(centena / 2)
 let vinte = parseInt(dezena/2)
 let ndez = parseInt(dezena%2)
 let ndois = parseInt(unidade/2)
-let ncinq = parseInt(( centena/2) )
+let ncinq = 0
 if (dezena >= 5){
 }
 if (saque < min || saque > max ) {
@@ -19,6 +20,7 @@ if (saque < min || saque > max ) {
 }
 
  if(unidade % 2 == 0){
+
     if (centena > 0) {
         console.log(`Notas de 100: ${centena}`)
     }
@@ -33,19 +35,31 @@ if (saque < min || saque > max ) {
         console.log(`Notas de 2: ${ndois}`)
     }
 
-} else if (unidade % 2 !== 0 ) {
-    ncinq = 1
-
+} 
+else if (unidade % 2 !== 0 ) {
+    ncinq ++
+    ndois = ndois + 3
+    if(ndois >= 5){
+       dezena = dezena + 1
+         ndois = ndois - 5
+    }
+    if ((dezena % 2 == 0 && unidade == 3)){
+        vinte = vinte - 1
+    }
+  
     if (centena > 0) {
         console.log(`Notas de 100: ${centena}`)
     }
-  
+    if (vinte > 0) {
+        console.log(`Notas de 20: ${vinte}`)
+
+    }
+   dezena = dezena - vinte * 2
     if (dezena > 1) {
         console.log(`Notas de 10: ${dezena - 1}`)
     }
     console.log(`Notas de 5: ${ncinq}`)
     if (ndois > 0) {
-        console.log(`Notas de 2: ${ndois + 3}`)
+        console.log(`Notas de 2: ${ndois }`)
     }
-
 }
