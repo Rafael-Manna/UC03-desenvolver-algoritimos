@@ -11,8 +11,6 @@ let vinte = parseInt(dezena/2)
 let ndez = parseInt(dezena%2)
 let ndois = parseInt(unidade/2)
 let ncinq = 0
-if (dezena >= 5){
-}
 if (saque < min || saque > max ) {
     console.log('Valor inválido para saque!')
 } else  {
@@ -43,7 +41,7 @@ else if (unidade % 2 !== 0 ) {
        dezena = dezena + 1
          ndois = ndois - 5
     }
-    if ((dezena % 2 == 0 && unidade == 3)){
+    if ((dezena % 2 == 0 && (unidade == 3  || unidade == 1))){
         vinte = vinte - 1
     }
   
