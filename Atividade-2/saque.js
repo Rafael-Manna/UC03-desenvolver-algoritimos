@@ -9,3 +9,4 @@ let centena = parseInt(saque / 100)
 let vinte = parseInt(dezena / 2)
 let ndez = parseInt(dezena % 2)
 let ndois = parseInt(unidade / 2)
+//teste
