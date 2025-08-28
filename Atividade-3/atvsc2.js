@@ -47,7 +47,7 @@ switch(calc){
                 console.log(`Raiz quadrada do primeiro valor: ${v3.toFixed(2)}`)
                  v4 = Math.sqrt(v2)
                 console.log(`Raiz quadrada do segundo valor: ${v4.toFixed(2)}`)
-                break;
+               o break;
             case 2:
                  v3 = v1**v2
                 console.log(` primeiro valor elevado ao segundo: ${v3}`)
