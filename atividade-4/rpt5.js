@@ -10,4 +10,3 @@ const prompt = promptSync()
      
        console.log(`Ano ${2010 + i} - R$ ${salario.toFixed(2)} - | ${percentual.toFixed(3)*100}% > ${2009 + i} `);
    }
- 
