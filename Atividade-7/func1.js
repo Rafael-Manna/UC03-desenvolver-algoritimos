@@ -28,6 +28,7 @@ switch (n1) {
         console.log("Opção inválida");
         break;
 }
-let n2 = parseFloat(prompt("tempo em minutos de exercicio: "));
+let n2 = parseFloat(prompt("tempo em minutos de 
+    exercicio: "));
 let retorno = calo(n1, n2);
 console.log("Seu gasto calorico foi: " + retorno);
