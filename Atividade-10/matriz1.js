@@ -89,4 +89,15 @@ if (resultado) {
     }
   }
 }
+console.log("Voce deseja remover alguma refeição? (s/n)");
+let remover = prompt().toLowerCase();
+if(remover === 's' || remover === 'sim'){
+  const removerResultado = diaSemana();
+  if(removerResultado){
+    const {dia: removerDia, refeicao: removerRefeicao} = removerResultado;
+    matriz[removerDia - 1][removerRefeicao - 1] = '';
+    console.log(`Refeição do dia ${removerDia} removida.`);
+  }
+}
 console.table(matriz);
+
