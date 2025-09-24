@@ -22,7 +22,7 @@ class Cliente{
         return this.#renda;
     }
     set nome(novoNome) {
-        if (typeof novoNome === "string" && novoNome.trim() !== "") {
+        if (typeof novoNome === "string" && novoNome.trim() !== "" && isNaN(novoNome)) {
           this.#nome = novoNome;
         } else {
           console.log("Nome inválido");
