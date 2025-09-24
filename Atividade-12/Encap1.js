@@ -53,3 +53,13 @@ cliente1.imprimir();
 cliente2.imprimir();
 cliente3.imprimir();
 
+console.log("deseja alterar o nome do cliente 3? (s/n)")
+let resposta = prompt();
+if (resposta.toLowerCase() === "s") {
+    let novoNome = prompt("Digite o novo nome: ");
+    cliente3.nome = novoNome;
+}
+
+cliente1.imprimir();
+cliente2.imprimir();
+cliente3.imprimir();
