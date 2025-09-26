@@ -131,7 +131,18 @@ class Monitor {
    }
 }
 class Computador{
-    
+    #Memoria
+    #Processador
+    #Armazenamento
+    #Monitor
+    constructor(marca,modelo,Memoria,Processador,Armazenamento,Monitor){
+  this.marca = marca
+  this.modelo = modelo
+  this.#Memoria = Memoria
+  this.#Processador = Processador
+  this.#Armazenamento = Armazenamento
+  this.#Monitor = Monitor
+    }
 }
 let memoria1 = new Memoria();
 memoria1.ramtam = 16;
