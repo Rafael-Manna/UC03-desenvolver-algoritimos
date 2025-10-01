@@ -1,6 +1,7 @@
 import PromptSync from 'prompt-sync';
 const prompt = PromptSync();
 //polimorfismo
+//teste
 // classe mae pessoa
 class Pessoa {
     constructor(nome, cpf, datanas) {
