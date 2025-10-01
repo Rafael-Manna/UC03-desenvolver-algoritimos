@@ -1,8 +1,3 @@
-import PromptSync from 'prompt-sync';
-const prompt = PromptSync();
-//polimorfismo
-//teste
-// classe mae pessoa
 class Pessoa {
     constructor(nome, cpf, datanas) {
         this.nome = nome;
@@ -16,36 +11,39 @@ class Pessoa {
 }
 
 class Funcionario extends Pessoa {
-    constructor(nome, cpf, datanas, cargo, salario, matricula) {
+    constructor(nome, cpf, datanas, cargo, salario, salariobase, matricula, horaextra) {
         super(nome, cpf, datanas);
         this.cargo = cargo;
         this.salario = salario;
+        this.salariobase = salariobase;
         this.matricula = matricula;
+        this.horaextra = horaextra;
     }
 
-    calcHE(he) {
-        this.salario += he * 15;
+    calcHE() {
+        this.salario += this.horaextra * 15;
+        if (this.horaextra > 0) {
+            this.salario -= this.salario * 0.09;
+        } else {
+            this.salario -= this.salario * 0.075;
+        }
     }
 
     imprimir() {
         super.imprimir();
-        console.log(`Cargo: ${this.cargo}\nSalário: ${this.salario.toFixed(2)}\nMatrícula: ${this.matricula}`);
+        console.log(`Cargo: ${this.cargo}\nSalario Base: ${this.salariobase}\nSalário: ${this.salario.toFixed(2)}\nMatrícula: ${this.matricula}`);
     }
 }
 
 class Gerente extends Funcionario {
-    constructor(nome, cpf, datanas, cargo, salario, matricula, setor, qtdeqp) {
-        super(nome, cpf, datanas, cargo, salario, matricula);
+    constructor(nome, cpf, datanas, cargo, salario, salariobase, matricula, setor, qtdeqp) {
+        super(nome, cpf, datanas, cargo, salario, salariobase, matricula, 0);
         this.setor = setor;
         this.qtdeqp = qtdeqp;
     }
 
     bonificacao() {
-        if (this.qtdeqp >= 10) {
-            this.salario *= 1.15;
-        } else {
-            this.salario *= 1.07;
-        }
+        this.salario *= (this.qtdeqp >= 10) ? 1.15 : 1.07;
     }
 
     imprimir() {
@@ -55,8 +53,8 @@ class Gerente extends Funcionario {
 }
 
 class Diretor extends Funcionario {
-    constructor(nome, cpf, datanas, cargo, salario, matricula, partLucros, dep, tempodirecao) {
-        super(nome, cpf, datanas, cargo, salario, matricula);
+    constructor(nome, cpf, datanas, cargo, salario, salariobase, matricula, partLucros, dep, tempodirecao) {
+        super(nome, cpf, datanas, cargo, salario, salariobase, matricula, 0);
         this.partLucros = partLucros;
         this.dep = dep;
         this.tempodirecao = tempodirecao;
@@ -97,7 +95,6 @@ class Dono extends Pessoa {
     retirar(valor) {
         this.patrimonio -= valor;
         this.partacao -= valor;
-
     }
 
     imprimir() {
@@ -107,6 +104,9 @@ class Dono extends Pessoa {
 }
 
 // Menu
+import PromptSync from 'prompt-sync';
+const prompt = PromptSync();
+
 console.log(`O que você quer cadastrar:\n[1] Funcionario\n[2] Gerente\n[3] Diretor\n[4] Dono`);
 let escolha = prompt('');
 
@@ -118,10 +118,11 @@ switch (escolha) {
     case '1': {
         let cargo = prompt("Digite o cargo: ");
         let salario = parseFloat(prompt("Digite o salário: "));
+        let salariobase = salario;
         let matricula = prompt("Digite a matrícula: ");
-        let horas = Number(prompt("Quantas horas extras voce trabalhou esse mês: "));
-        let f = new Funcionario(nome, cpf, datanas, cargo, salario, matricula);
-        f.calcHE(horas);
+        let horaextra = Number(prompt("Quantas horas extras você trabalhou esse mês: "));
+        let f = new Funcionario(nome, cpf, datanas, cargo, salario, salariobase, matricula, horaextra);
+        f.calcHE();
         f.imprimir();
         break;
     }
@@ -129,10 +130,11 @@ switch (escolha) {
     case '2': {
         let cargo = prompt("Digite o cargo: ");
         let salario = parseFloat(prompt("Digite o salário: "));
+        let salariobase = salario;
         let matricula = prompt("Digite a matrícula: ");
         let setor = prompt("Digite o setor: ");
         let qtdeqp = parseInt(prompt("Digite a quantidade de pessoas na equipe: "));
-        let g = new Gerente(nome, cpf, datanas, cargo, salario, matricula, setor, qtdeqp);
+        let g = new Gerente(nome, cpf, datanas, cargo, salario, salariobase, matricula, setor, qtdeqp);
         g.bonificacao();
         g.imprimir();
         break;
@@ -141,11 +143,12 @@ switch (escolha) {
     case '3': {
         let cargo = prompt("Digite o cargo: ");
         let salario = parseFloat(prompt("Digite o salário: "));
+        let salariobase = salario;
         let matricula = prompt("Digite a matrícula: ");
         let partLucros = prompt("Participação nos lucros (habilitado/desabilitado): ");
         let dep = prompt("Digite o departamento: ");
         let tempodirecao = parseInt(prompt("Digite o tempo de direção (anos): "));
-        let d = new Diretor(nome, cpf, datanas, cargo, salario, matricula, partLucros, dep, tempodirecao);
+        let d = new Diretor(nome, cpf, datanas, cargo, salario, salariobase, matricula, partLucros, dep, tempodirecao);
         d.grat();
         d.imprimir();
         break;
@@ -154,10 +157,10 @@ switch (escolha) {
     case '4': {
         let patrimonio = parseFloat(prompt("Digite o patrimônio da empresa: "));
         let partacao = parseFloat(prompt("Digite o valor de participação: "));
-        let invest = parseFloat(prompt("Digite o Valor para investir:"))
-        let ret = parseFloat(prompt("Digite o Valor para retirar:"))
+        let invest = parseFloat(prompt("Digite o Valor para investir: "));
+        let ret = parseFloat(prompt("Digite o Valor para retirar: "));
         let dono = new Dono(nome, cpf, datanas, patrimonio, partacao);
-        dono.investir(invest); 
+        dono.investir(invest);
         dono.retirar(ret);
         dono.imprimir();
         break;

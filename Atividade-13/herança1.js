@@ -23,6 +23,7 @@ class Funcionario extends Pessoa {
 
     calcHE(he) {
         this.salario += he * 15;
+       
     }
 
     imprimir() {
