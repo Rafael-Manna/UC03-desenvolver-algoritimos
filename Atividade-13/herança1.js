@@ -1,6 +1,6 @@
 import PromptSync from 'prompt-sync';
 const prompt = PromptSync();
-
+// classe mae pssoa
 class Pessoa {
     constructor(nome, cpf, datanas) {
         this.nome = nome;
@@ -41,6 +41,8 @@ class Gerente extends Funcionario {
     bonificacao() {
         if (this.qtdeqp >= 10) {
             this.salario *= 1.15;
+        } else {
+            this.salario *= 1.07;
         }
     }
 
@@ -115,7 +117,9 @@ switch (escolha) {
         let cargo = prompt("Digite o cargo: ");
         let salario = parseFloat(prompt("Digite o salário: "));
         let matricula = prompt("Digite a matrícula: ");
+        let horas = Number(prompt("Quantas horas extras voce trabalhou esse mês: "));
         let f = new Funcionario(nome, cpf, datanas, cargo, salario, matricula);
+        f.calcHE(horas);
         f.imprimir();
         break;
     }
