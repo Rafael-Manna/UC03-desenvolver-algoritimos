@@ -5,18 +5,32 @@ class Hotel{
     this.nomeH = "Hotel"
     this.listaDeQuartos = [];
     this.listaClientes = [];
+    this.listaReservas = [];
   }
   adicionarCliente() {
     let nome = prompt("Digite o nome do cliente:");
-    let cpf = Number(prompt("Digite o CPF:"));
+    let cpf = (prompt("Digite o CPF:"));
     let contato = prompt("Digite o contato:");
-
+    if (cpf.length != 11 || isNaN(Number(cpf))){
+      console.log("CPF INVALIDO!!");
+      return;
+    }
+    if (contato.length != 11 || isNaN(Number(contato))){
+      console.log("NUMERO INVALIDO!!");
+      return;
+    }
+    for(let i = 0; i < this.listaClientes.length;i++){
+      if (cpf == this.listaClientes[i].cpf){
+        console.log("Cliente ja existe!!");
+        return;
+      }
+    }
     let novoCliente = new Cliente(nome, cpf, contato);
-    this.listaDeClientes.push(novoCliente);
+    this.listaClientes.push(novoCliente);
     console.log("Cliente cadastrado com sucesso!");
   }
   adicionarQuarto(){
-    let adcnum = Number( prompt ("Digite o numero do Quarto: "))
+    let adcnum = ( prompt ("Digite o numero do Quarto: "))
     let adctipo = prompt("Digite o tipo do Quarto: ")
     for(let i = 0; i < this.listaDeQuartos.length;i++){
       if (adcnum == this.listaDeQuartos[i].numeroQuarto){
@@ -26,17 +40,28 @@ class Hotel{
     }
     let novoQuarto = new Quarto(adcnum,adctipo);
     this.listaDeQuartos.push(novoQuarto);
+    console.log("Quarto cadastrado com sucesso!");
+
   }
   reservarQuarto(){
     let adccli = prompt ("Digite o nome do cliente:");
-    let adccpf = Number( prompt ("Digite o Cpf do cliente que quer reservar: "));
-    let adcctt = Number( prompt ("Digite o Numero do cliente que quer reservar: "));
+    let adccpf =  prompt ("Digite o Cpf do cliente que quer reservar: ");
+    let adcctt =  prompt ("Digite o Numero do cliente que quer reservar: ");
     console.log(this.listaDeQuartos);
-    let adcnumr = Number( prompt ("Digite o numero do Quarto: "));
+    let adcnumr = ( prompt ("Digite o numero do Quarto: "));
 
   }
   listarQuartos(){
+    console.log("Lista de Quartos:")
     console.log(this.listaDeQuartos);
+  }
+  listarClientes(){
+    console.log("\nLista de Clientes:");
+    for (let i = 0; i < this.listaClientes.length; i++) {
+      console.log(`-------N°${i+1}---------`);
+      this.listaClientes[i].imprimir();
+      console.log(`-------------------`);
+    }
   }
 }
 class Cliente {
@@ -53,13 +78,9 @@ class Cliente {
   }
 
   imprimir() {
-    console.log(`
------- DADOS DO CLIENTE ------
-Nome: ${this.nome}
+    console.log(`Nome: ${this.nome}
 CPF: ${this.#cpf}
-Contato: ${this.#contato}
--------------------------------
-    `);
+Contato: ${this.#contato}`);
   }
   
   get cpf() {
@@ -89,9 +110,7 @@ class Quarto {
         console.log(`
 ------ DADOS DO QUARTO ------
 Número do Quarto: ${this.numeroQuarto}
-Tipo de Quarto: ${this.tipoQuarto}
--------------------------------
-`);
+Tipo de Quarto: ${this.tipoQuarto}`);
     }
 }
 class Reserva {
@@ -109,15 +128,12 @@ class Reserva {
   }
 }
 
-const cliente1 = new Cliente();
-cliente1.adicionarCliente();
-const quarto1 = new Quarto(101, "Suíte Deluxe");
-const reserva1 = new Reserva(cliente1, quarto1, "13/10/2025");
 
-reserva1.imprimir();
 const meuHotel = new Hotel();
+meuHotel.adicionarCliente();
+meuHotel.adicionarCliente();
 meuHotel.adicionarQuarto();
 meuHotel.adicionarQuarto();
 meuHotel.adicionarQuarto();
-
 meuHotel.listarQuartos();
+meuHotel.listarClientes();
