@@ -141,8 +141,18 @@ class Hotel {
       console.log("Nenhum quarto disponível.");
     }
   }
+  listarClientes() { 
+    console.log("\n=== LISTA DE TODOS OS CLIENTES CADASTRADOS ===")
+    console.log(`Quantidade de clientes: ${this.listaClientes.length}`)
+    for(let i = 0; i<this.listaClientes.length;i++){
+      console.log(`\n----- DADOS DO CLIENTE ${i + 1} -----`);
+      console.log("Nome: " + this.listaClientes[i].nome);
+      console.log("CPF: " + this.listaClientes[i].cpf);
+      console.log("Contato: " + this.listaClientes[i].contato);
 
-  listarReservas() {
+    }
+  }
+  listarReservas() { // "printar" os relatorios com essa função
     console.log("\n=== LISTA DE TODAS AS RESERVAS ===");
 
     if (this.listaReservas.length == 0) {
@@ -166,6 +176,7 @@ class Hotel {
       console.log("\nData da reserva: " + this.listaReservas[i].dataReserva);
       console.log("=====================================");
     }
+    
   }
 
   reservarQuarto() {
@@ -268,40 +279,44 @@ while (opcao != "0") {
 1 - Adicionar Cliente
 2 - Adicionar Quarto
 3 - Listar Quartos Disponíveis
-4 - Reservar Quarto
-5 - Cancelar Reserva
-6 - Listar Todas as Reservas
-7 - Informações de uma Reserva
+4 - Listar Clientes
+5 - Reservar Quarto
+6 - Cancelar Reserva
+7 - Listar Todas as Reservas
+8 - Informações de uma Reserva
 0 - Sair
 `);
   opcao = prompt("Escolha uma opção: ");
 
-  switch (opcao) {
-    case "1":
-      hotel.adicionarCliente();
-      break;
-    case "2":
-      hotel.adicionarQuarto();
-      break;
-    case "3":
-      hotel.listarQuartosDisponiveis();
-      break;
-    case "4":
-      hotel.reservarQuarto();
-      break;
-    case "5":
-      hotel.cancelarReserva();
-      break;
-    case "6":
-      hotel.listarReservas();
-      break;
-    case "7":
-      hotel.informacoesReserva();
-      break;
-    case "0":
-      console.log("Encerrando o sistema...");
-      break;
-    default:
-      console.log("Opção inválida!");
-  }
+ switch (opcao) {
+  case "1":
+    hotel.adicionarCliente();
+    break;
+  case "2":
+    hotel.adicionarQuarto();
+    break;
+  case "3":
+    hotel.listarQuartosDisponiveis();
+    break;
+  case "4":
+    hotel.listarClientes();
+    break;
+  case "5":
+    hotel.reservarQuarto(); 
+    break;
+  case "6":
+    hotel.cancelarReserva(); 
+    break;
+  case "7":
+    hotel.listarReservas();
+    break;
+  case "8":
+    hotel.informacoesReserva();
+    break;
+  case "0":
+    console.log("Encerrando o sistema...");
+    break;
+  default:
+    console.log("Opção inválida!");
+}
 }
