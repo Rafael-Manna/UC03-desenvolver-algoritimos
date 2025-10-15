@@ -15,4 +15,3 @@ console.log('Caminho ABSOLUTO? ', path.isAbsolute(caminho));
 console.log('Caminho relativo: ', path.relative('C:/Users/a95826722', caminho));
 console.log('Caminho combinado: ', path.join(caminho, 'teste'));
 
-fs.mkdirSync(caminho)
